@@ -43,7 +43,11 @@ test('visiting /tests/mobile-first', function(assert) {
 
       andThen(() => {
         assert.equal(find('h1.layout-test').text(), 'Desktop!', `The layout renders the desktop layout when width is ${bp.desktop}`);
+        run(() => {
+          deviceLayout.set('width', bp.huge);
+        });
 
+        assert.equal(find('h1.layout-test').text(), 'Desktop!', `The layout still renders the desktop layout when width is ${bp.huge} (no huge layout defined)`);
       });
     });
 
